@@ -20,7 +20,7 @@ func autoAction() {
 			playIndex = 0
 		}
 	}
-	if single {
+	if random || repeat || single {
 		player.Play(&musics[playIndex])
 	}
 }
