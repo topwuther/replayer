@@ -9,7 +9,6 @@ require (
 	github.com/hajimehoshi/go-mp3 v0.3.4
 	github.com/jfreymuth/pulse v0.1.1
 	golang.org/x/exp/shiny v0.0.0-20240416160154-fe59bbe5cc7f
-	gorm.io/driver/sqlite v1.5.5
 	gorm.io/gorm v1.25.10
 )
 
@@ -19,7 +18,6 @@ require (
 	github.com/go-text/typesetting v0.1.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/mattn/go-sqlite3 v1.14.17 // indirect
 	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
 	golang.org/x/image v0.15.0 // indirect
 	golang.org/x/net v0.25.0 // indirect
