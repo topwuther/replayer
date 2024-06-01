@@ -57,8 +57,8 @@ func (p *Player) Play(music *Music) {
 		p.Err = nil
 		p.music = music
 		realfp := musicdir + music.Filename
-		_, err = os.Stat(realfp)
-		if os.IsNotExist(err) {
+		stat, err := os.Stat(realfp)
+		if os.IsNotExist(err) || stat.Size() == 0 {
 			server := settings.SettingConfig.Server
 			client := resty.New()
 			p.Downloading = true
