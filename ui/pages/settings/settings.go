@@ -13,7 +13,6 @@ import (
 	"github.com/topwuther/replayer/ui"
 	"github.com/topwuther/replayer/ui/icon"
 	"github.com/topwuther/replayer/ui/layout"
-	"github.com/topwuther/replayer/ui/pages/dialog"
 	"github.com/topwuther/replayer/ui/values"
 	"gorm.io/gorm"
 )
@@ -88,23 +87,6 @@ func Init(w *ui.Window) {
 	}
 	SettingConfig.Show()
 	SettingConfig.Update(w)
-	res, err := SettingConfig.User.Login()
-	switch {
-	case err != nil:
-		dialog := dialog.Dialog{
-			Title:    "login failed",
-			Text:     err.Error(),
-			NextPage: PAGE_NAME,
-		}
-		dialog.Show(w)
-	case !res:
-		dialog := dialog.Dialog{
-			Title:    "login failed",
-			Text:     "username or password has wrong",
-			NextPage: PAGE_NAME,
-		}
-		dialog.Show(w)
-	}
 }
 
 func Layout(w *ui.Window) D {
@@ -195,21 +177,15 @@ func Layout(w *ui.Window) D {
 			Random:   blRandom.Value,
 			Single:   blSingle.Value,
 		}
+		msg.Text = "save success"
 		data, err := json.Marshal(SettingConfig)
 		if err != nil {
-			panic(err)
+			msg.Text = "save failed"
 		}
 		if err := os.WriteFile(cfile, data, 0644); err != nil {
-			panic(err)
+			msg.Text = "save failed"
 		}
-		res, _ := user.Login();
-		switch {
-		case !res:
-			msg.Text = "login failed"
-		default:
-			msg.Text = "save success"
-			SettingConfig.Update(w)
-		}
+		SettingConfig.Update(w)
 		go func() {
 			time.Sleep(1 * time.Second)
 			msg.Text = ""
