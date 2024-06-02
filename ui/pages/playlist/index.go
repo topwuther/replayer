@@ -34,7 +34,7 @@ var (
 	grid      = new(component.GridState)
 	tl        = &TableLayout{}
 	playIndex = 0
-	cklist    = make([]widget.Clickable, 1024)
+	cklist    = make([]widget.Clickable, 10)
 	ckplay    = new(widget.Clickable)
 	cknext    = new(widget.Clickable)
 	ckprev    = new(widget.Clickable)
@@ -60,7 +60,7 @@ func Init(w *ui.Window) {
 				continue
 			}
 			progress.Value = player.Progress()
-			if progress.Value == 1 {
+			if progress.Value > 0.999 {
 				autoAction()
 				if player.Err != nil {
 					dialog := dialog.Dialog{
